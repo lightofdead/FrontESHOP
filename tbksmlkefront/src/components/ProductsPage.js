@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import '../styles.css';
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
@@ -82,11 +83,14 @@ const ProductsPage = () => {
   });
 
   return (
-    <div>
-      <h1>Товары для бронирования</h1>
+    <div >
+        <div className="header">
+      <h1 style={{ margin: 0 }}>Товары для бронирования</h1>
+      </div>
+      <div className="container">
       <Link to="/buy-products">Страница выкупа товаров</Link>
       <Link to="/add-product">Добавить товар</Link>
-      <div>
+      <div className="container">
         <label>Выберите категорию: </label>
         <select
           value={selectedCategory}
@@ -123,6 +127,7 @@ const ProductsPage = () => {
             </li>
           ))}
       </ul>
+      </div>
     </div>
   );
 };

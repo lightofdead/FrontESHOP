@@ -1,6 +1,7 @@
 // AddProductPage.js
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import '../styles.css';
 
 const AddProductPage = () => {
   const [productName, setProductName] = useState('');
@@ -52,11 +53,16 @@ const AddProductPage = () => {
 
   return (
     <div>
-      <h2>Добавить товар</h2>
+      <div className="header">
+        <h1 style={{ margin: 0 }}>Добавить товар</h1>
+      </div>
       
       <Link to="/">Вернуться на главную</Link>
       <form>
-        <label>
+        
+      <div className="container">
+        
+      <label>
           Наименование товара:
           <input type="text" value={productName} onChange={(e) => setProductName(e.target.value)} />
         </label>
@@ -98,6 +104,7 @@ const AddProductPage = () => {
           </select>
         </label>
         <br />
+      </div>
         <button type="button" onClick={handleAddProduct}>
           Добавить товар
         </button>
