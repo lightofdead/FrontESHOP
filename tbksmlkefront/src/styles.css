@@ -4,9 +4,9 @@ body {
     margin: 0;
     padding: 0;
     
-  background-color: #f5f5f5;
+  background-color: #ffffff8a;
   }
-  
+
   .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -81,7 +81,7 @@ body {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease-in-out;
-    background-color: #fff;
+    background-color: #8eebd2;
   }
   
   .product-item:hover {
