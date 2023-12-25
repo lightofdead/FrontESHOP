@@ -71,9 +71,19 @@ const BuyProductsPage = () => {
   };
 
   const sortedBuyProducts = [...buyProducts].sort((a, b) => {
+    if(sortCriteria === 'price')
+      {
+        
+        if (sortDirection === 'asc') {
+        return a[sortCriteria] - b[sortCriteria];
+        }
+        else{
+          return b[sortCriteria] - a[sortCriteria];
+        }
+      }
     const aValue = a[sortCriteria];
     const bValue = b[sortCriteria];
-
+    console.log(a, b);
     if (sortDirection === 'asc') {
       return aValue.localeCompare(bValue, undefined, { sensitivity: 'base' });
     } else {
@@ -83,16 +93,16 @@ const BuyProductsPage = () => {
 
   return (
     <div>
-      <h1>Товары для выкупа</h1>
-      <Link to="/">Назад к товарам для бронирования</Link>
+      <h1 className="header">Товары для выкупа</h1>
+      <Link className="link" to="/">Назад к товарам для бронирования</Link>
       <div>
-        <label>Сортировка по: </label>
-        <select value={sortCriteria} onChange={(e) => handleSortChange(e.target.value)}>
+        <label className="form-label">Сортировка по: </label>
+        <select className="form-select" value={sortCriteria} onChange={(e) => handleSortChange(e.target.value)}>
           <option value="name">Имя</option>
           <option value="price">Цена</option>
-          <option value="category">Категория</option>
+          <option value="categoryId">Категория</option>
         </select>
-        <button onClick={() => handleSortChange(sortCriteria)}>
+        <button className="form-button" onClick={() => handleSortChange(sortCriteria)}>
           {sortDirection === 'asc' ? 'По возрастанию' : 'По убыванию'}
         </button>
       </div>
@@ -102,8 +112,11 @@ const BuyProductsPage = () => {
             <h3>{product.name}</h3>
             <p>Цена: {product.price}</p>
             <p>Описание: {product.description}</p>
-            <button onClick={() => handlePurchaseClick(product.id)}>ВЫКУПИТЬ</button>
-            <button onClick={() => handleCancelClick(product.id)}>ОТМЕНИТЬ</button>
+            <p>Количество: {product.count}</p>
+            <p>Номер продавца: {product.number}</p>
+            <p>Категория: {product.categoryId}</p>
+            <button className="form-button" onClick={() => handlePurchaseClick(product.id)}>ВЫКУПИТЬ</button>
+            <button className="form-button" onClick={() => handleCancelClick(product.id)}>ОТМЕНИТЬ</button>
           </li>
         ))}
       </ul>

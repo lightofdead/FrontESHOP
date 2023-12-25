@@ -4,8 +4,6 @@ import '../styles.css';
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('');
   const [sortCriteria, setSortCriteria] = useState('name');
   const [sortDirection, setSortDirection] = useState('asc');
 
@@ -15,30 +13,14 @@ const ProductsPage = () => {
         const response = await fetch('https://localhost:7106/api/Products/GetAll');
         const data = await response.json();
         setProducts(data.value);
-        console.log(products);
       } catch (error) {
         console.error('Error fetching products:', error);
       }
     };
-
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch('https://localhost:7106/api/Categories/GetAll');
-        const data = await response.json();
-        setCategories(data.value);
-        // Устанавливаем первую категорию по умолчанию
-        if (data.value.length > 0) {
-          setSelectedCategory(data.value[0].name);
-        }
-      } catch (error) {
-        console.error('Error fetching categories:', error);
-      }
-    };
-
     fetchProducts();
-    fetchCategories();
   }, []);
 
+  
   const handleBuyClick = async (productId) => {
     try {
       const response = await fetch('https://localhost:7106/api/ProductsForBuy/Create', {
@@ -48,9 +30,12 @@ const ProductsPage = () => {
         },
         body: JSON.stringify({ product: productId }),
       });
-
+      
       if (response.ok) {
-        console.log(`Товар с id ${productId} успешно куплен!`);
+        const updatedProducts = products.filter((product) => product.id !== productId);
+        setProducts(updatedProducts);
+
+        console.log(`Товар с id ${productId} успешно забронирован!`);
       } else {
         console.error(`Ошибка при покупке товара с id ${productId}`);
       }
@@ -72,9 +57,18 @@ const ProductsPage = () => {
   };
 
   const sortedProducts = [...products].sort((a, b) => {
+    if(sortCriteria === 'price')
+      {
+        
+        if (sortDirection === 'asc') {
+        return a[sortCriteria] - b[sortCriteria];
+        }
+        else{
+          return b[sortCriteria] - a[sortCriteria];
+        }
+      }
     const aValue = a[sortCriteria];
     const bValue = b[sortCriteria];
-
     if (sortDirection === 'asc') {
       return aValue.localeCompare(bValue, undefined, { sensitivity: 'base' });
     } else {
@@ -83,34 +77,21 @@ const ProductsPage = () => {
   });
 
   return (
-    <div >
+    <div className="body">
         <div className="header">
       <h1 style={{ margin: 0 }}>Товары для бронирования</h1>
       </div>
       <div className="container">
-      <Link to="/buy-products">Страница выкупа товаров</Link>
-      <Link to="/add-product">Добавить товар</Link>
-      <div className="container">
-        <label>Выберите категорию: </label>
-        <select
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-        >
-          {categories.map((category) => (
-            <option key={category.id} value={category.name}>
-              {category.name}
-            </option>
-          ))}
-        </select>
-      </div>
+      <Link className="link" to="/buy-products">Страница выкупа товаров</Link>
+      <Link className="link" to="/add-product">Добавить товар</Link>
       <div>
-        <label>Сортировка по: </label>
-        <select value={sortCriteria} onChange={(e) => handleSortChange(e.target.value)}>
+        <label className="form-label">Сортировка по: </label>
+        <select className="form-select" value={sortCriteria} onChange={(e) => handleSortChange(e.target.value)}>
           <option value="name">Имя</option>
           <option value="price">Цена</option>
-          <option value="category">Категория</option>
+          <option value="categoryId">Категория</option>
         </select>
-        <button onClick={() => handleSortChange(sortCriteria)}>
+        <button className="form-button" onClick={() => handleSortChange(sortCriteria)}>
           {sortDirection === 'asc' ? 'По возрастанию' : 'По убыванию'}
         </button>
       </div>
@@ -120,10 +101,12 @@ const ProductsPage = () => {
           .map((product) => (
             <li key={product.id}>
               <h3>{product.name}</h3>
-              <img src={product.imageUrl} alt={product.name} style={{ maxWidth: '200px' }} />
+              <img src={product.url} alt={product.name} style={{ maxWidth: '200px' }} />
               <p>Цена: {product.price}</p>
               <p>Описание: {product.description}</p>
-              <button onClick={() => handleBuyClick(product.id)}>КУПИТЬ</button>
+              <p>Количество: {product.count}</p>
+              <p>Категория: {product.categoryId}</p>
+              <button className="form-button" onClick={() => handleBuyClick(product.id)}>ЗАБРОНИРОВАТЬ</button>
             </li>
           ))}
       </ul>

@@ -52,49 +52,49 @@ const AddProductPage = () => {
   };
 
   return (
-    <div>
+    <div className="body">
       <div className="header">
         <h1 style={{ margin: 0 }}>Добавить товар</h1>
       </div>
       
-      <Link to="/">Вернуться на главную</Link>
+      <Link className="link" to="/">Вернуться на главную</Link>
       <form>
         
       <div className="container">
         
-      <label>
+      <label className="form-label">
           Наименование товара:
-          <input type="text" value={productName} onChange={(e) => setProductName(e.target.value)} />
+          <input className="form-input" type="text" value={productName} onChange={(e) => setProductName(e.target.value)} />
         </label>
         <br />
-        <label>
+        <label className="form-label">
           Цена товара:
-          <input type="number" value={productPrice} onChange={(e) => setProductPrice(e.target.value)} />
-        </label>
+          <input className="form-input" type="number" value={productPrice} onChange={(e) => setProductPrice(e.target.value)} />
+        </label >
         <br />
-        <label>
+        <label className="form-label">
           Описание товара:
-          <input type="text" value={desc} onChange={(e) => setProductDesc(e.target.value)} />
+          <input className="form-input" type="text" value={desc} onChange={(e) => setProductDesc(e.target.value)} />
         </label>
         <br />
-        <label>
+        <label className="form-label">
           Количество товара:
-          <input type="number" value={count} onChange={(e) => setProductCount(e.target.value)} />
+          <input className="form-input" type="number" value={count} onChange={(e) => setProductCount(e.target.value)} />
         </label>
         <br />
-        <label>
+        <label className="form-label">
           URL картинки товара:
-          <input type="text" value={url} onChange={(e) => setProductUrl(e.target.value)} />
+          <input className="form-input" type="text" value={url} onChange={(e) => setProductUrl(e.target.value)} />
         </label>
         <br />
-        <label>
+        <label className="form-label">
           Номер продавца:
-          <input type="text" value={numb} onChange={(e) => setProductNumber(e.target.value)} />
+          <input className="form-input" type="text" value={numb} onChange={(e) => setProductNumber(e.target.value)} />
         </label>
         <br />
-        <label>
+        <label className="form-label">
           Категория:
-          <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+          <select className="form-select" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
             <option value="">Выберите категорию</option>
             {categories.map((category) => (
               <option key={category.id} value={category.name}>
@@ -105,7 +105,7 @@ const AddProductPage = () => {
         </label>
         <br />
       </div>
-        <button type="button" onClick={handleAddProduct}>
+        <button className="form-button" type="button" onClick={handleAddProduct}>
           Добавить товар
         </button>
       </form>
