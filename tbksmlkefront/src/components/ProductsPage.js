@@ -95,18 +95,17 @@ const ProductsPage = () => {
           {sortDirection === 'asc' ? 'По возрастанию' : 'По убыванию'}
         </button>
       </div>
-      <ul>
+      <ul className="product-list">
         {sortedProducts
-          //.filter((product) => selectedCategory === '' || product.category === selectedCategory)
           .map((product) => (
-            <li key={product.id}>
-              <h3>{product.name}</h3>
-              <img src={product.url} alt={product.name} style={{ maxWidth: '200px' }} />
-              <p>Цена: {product.price}</p>
-              <p>Описание: {product.description}</p>
-              <p>Количество: {product.count}</p>
-              <p>Категория: {product.categoryId}</p>
-              <button className="form-button" onClick={() => handleBuyClick(product.id)}>ЗАБРОНИРОВАТЬ</button>
+            <li key={product.id} className="product-item">
+              <h3 className="product-name">{product.name}</h3>
+              <img src={product.url} alt={product.name} className="product-image"  style={{ maxWidth: '200px' }} />
+              <p className="product-price">Цена: {product.price}</p>
+              <p className="product-description">Описание: {product.description}</p>
+              <p className="product-count">Количество: {product.count}</p>
+              <p className="product-category">Категория: {product.categoryId}</p>
+              <button className="buy-button" onClick={() => handleBuyClick(product.id)}>ЗАБРОНИРОВАТЬ</button>
             </li>
           ))}
       </ul>

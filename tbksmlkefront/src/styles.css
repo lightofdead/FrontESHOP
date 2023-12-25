@@ -3,12 +3,17 @@ body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0;
+    
+  background-color: #f5f5f5;
   }
   
   .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    background-color: #fff; /* Установите цвет фона для контейнера с контентом */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
   .header {
@@ -58,5 +63,64 @@ body {
   }
   
   .form-button:hover {
+    background-color: #2980b9;
+  }
+
+  .product-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .product-item {
+    width: calc(33.33% - 20px);
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+    background-color: #fff;
+  }
+  
+  .product-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .product-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .product-name {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  .product-price {
+    font-weight: bold;
+  }
+  
+  .product-description,
+  .product-count,
+  .product-category {
+    margin-top: 10px;
+    color: #777;
+  }
+  
+  .buy-button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .buy-button:hover {
     background-color: #2980b9;
   }

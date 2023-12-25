@@ -106,17 +106,19 @@ const BuyProductsPage = () => {
           {sortDirection === 'asc' ? 'По возрастанию' : 'По убыванию'}
         </button>
       </div>
-      <ul>
+      <ul className="product-list">
         {sortedBuyProducts.map((product) => (
-          <li key={product.id}>
-            <h3>{product.name}</h3>
-            <p>Цена: {product.price}</p>
-            <p>Описание: {product.description}</p>
-            <p>Количество: {product.count}</p>
-            <p>Номер продавца: {product.number}</p>
-            <p>Категория: {product.categoryId}</p>
-            <button className="form-button" onClick={() => handlePurchaseClick(product.id)}>ВЫКУПИТЬ</button>
-            <button className="form-button" onClick={() => handleCancelClick(product.id)}>ОТМЕНИТЬ</button>
+          <li key={product.id} className="product-item">
+            <h3 className="product-name">{product.name}</h3>
+            <p >Цена: {product.price}</p>
+            <img src={product.url} alt={product.name} className="product-image"  style={{ maxWidth: '200px' }} />
+            <p className="product-price">Цена: {product.price}</p>
+            <p className="product-description">Описание: {product.description}</p>
+            <p className="product-count">Количество: {product.count}</p>
+            <p className="product-category">Категория: {product.categoryId}</p>
+            <p className="product-description">Номер продавца: {product.number}</p>
+            <button className="buy-button" onClick={() => handlePurchaseClick(product.id)}>ВЫКУПИТЬ</button>
+            <button className="buy-button" onClick={() => handleCancelClick(product.id)}>ОТМЕНИТЬ</button>
           </li>
         ))}
       </ul>
